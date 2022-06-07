@@ -30,7 +30,7 @@ var emoji = CharacterTable.Create(
 Write(emoji, 10, 8, 8);
 
 var ascii = CharacterTable.Create(
-    L | P,
+    L | N | P,
     BasicLatin);
 
 Write(ascii, 10, 8, maxLength: 20);
