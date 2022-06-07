@@ -1,20 +1,20 @@
 ﻿using RandomString;
-using static System.Globalization.UnicodeCategory;
+using static RandomString.UnicodeCategories;
 using static System.Text.Unicode.UnicodeRanges;
 
 // https://en.wikipedia.org/wiki/Unicode_block
 var table1 = CharacterTable.Create(
-    (new(UppercaseLetter, LowercaseLetter, DecimalDigitNumber), BasicLatin),
-    (new(UppercaseLetter), LatinExtendedA),
-    (new(OtherLetter, OtherPunctuation, ModifierLetter), Hiragana),
-    (new(OtherLetter), new(0x20000, 10)), // CJK Unified Ideographs Extension B
-    (new(OtherSymbol), new(0x1F600, 20)) // Emoticon
+    (L | N, BasicLatin),
+    (UppercaseLetter, LatinExtendedA),
+    (OtherLetter | OtherPunctuation | ModifierLetter, Hiragana),
+    (OtherLetter, new(0x20000, 10)), // CJK Unified Ideographs Extension B
+    (OtherSymbol, new(0x1F600, 20)) // Emoticon
     );
 
 Write(table1, 10, 3, 8);
 
 var table2 = CharacterTable.Create(
-    new(UppercaseLetter, LowercaseLetter, OtherLetter),
+    L,
     BasicLatin,
     Hiragana,
     Katakana
@@ -23,14 +23,14 @@ var table2 = CharacterTable.Create(
 Write(table2, 10, 3, 8);
 
 var emoji = CharacterTable.Create(
-    new(OtherSymbol),
+    OtherSymbol,
     new RuneRange(0x1F000, 2800)
     );
 
 Write(emoji, 10, 8, 8);
 
 var ascii = CharacterTable.Create(
-    new(UppercaseLetter, LowercaseLetter, DecimalDigitNumber, OpenPunctuation, ClosePunctuation, OtherPunctuation),
+    L | P,
     BasicLatin);
 
 Write(ascii, 10, 8, maxLength: 20);
